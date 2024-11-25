@@ -92,15 +92,17 @@ with col10:
 with col11:
     AT = st.number_input('Adsorption temperature (°C)', 0.0)
 
-col12, col13, col14 = st.columns(3)
+col12, col13 = st.columns(2)
 with col12:
     PHS = st.number_input('pH of solution', 0.0)
 with col13:
     C0 = st.number_input('Initial concentration of heavy metal (mmol/g)', 0.0)
 
 # Dropdown for heavy metal type selection
-heavy_metals = ['As3+', 'Cd2+', 'Cu2+', 'Ni2+', 'Pb2+', 'Zn2+']
-selected_metal = st.selectbox('Select heavy metal type', heavy_metals)
+col14, col15 = st.columns(2)
+with col14:
+    heavy_metals = ['As3+', 'Cd2+', 'Cu2+', 'Ni2+', 'Pb2+', 'Zn2+']
+    selected_metal = st.selectbox('Select heavy metal type', heavy_metals)
 
 # Map selected heavy metal to its one-hot encoding
 metal_one_hot_map = {
