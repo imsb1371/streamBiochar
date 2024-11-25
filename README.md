@@ -1,4 +1,3 @@
-# Heavy Metals in European Soil
+# Heavy Metals in Soil
 
-Data-Driven Forecasting of Zinc, Cadmium, and Arsenic in European Soil via Advanced Ensemble Techniques (Version 1)
-
+Machine Learning-Assisted Prediction of Heavy Metal Removal Efficiency Using Biochar
