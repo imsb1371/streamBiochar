@@ -64,64 +64,87 @@ with st.container():
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    PHB = st.number_input('Biochar pH', 0.0)
+    PHs = st.number_input('pH of soil', 0.0)
 with col2:
-    Ash = st.number_input('Ash content (%)', 0.0)
+    ECs = st.number_input('Electrical conductivity (soil, mS·cm-1)', 0.0)
 with col3:
-    C_m = st.number_input('Mole contents of C (mmol/g)', 0.0)
+    CECs = st.number_input('Cation exchange capacity (Soil, cmol(+)/kg)', 0.0)
 
 col4, col5, col6 = st.columns(3)
 with col4:
-    H_m = st.number_input('Mole contents of H (mmol/g)', 0.0)
+    Clay = st.number_input('Clay (%)', 0.0)
 with col5:
-    N_m = st.number_input('Mole contents of N (mmol/g)', 0.0)
+    Silt = st.number_input('Silt (%)', 0.0)
 with col6:
-    O_m = st.number_input('Mole contents of O (mmol/g)', 0.0)
+    Sand = st.number_input('Sand (%)', 0.0)
 
 col7, col8, col9 = st.columns(3)
 with col7:
-    H_C = st.number_input('Atomic ratios (H/C)', 0.0)
+    OC = st.number_input('Organic carbon (OC, mg·kg-1)', 0.0)
 with col8:
-    HO2NC = st.number_input('Atomic ratios (HO2NC)', 0.0)
+    Ptem = st.number_input('Pyrolysis temperature (oC)', 0.0)
 with col9:
-    SA = st.number_input('Specific surface area (m2/g)', 0.0)
+    CH = st.number_input('Molar ratio of carbon to hydrogen', 0.0)
 
 col10, col11 = st.columns(2)
 with col10:
-    CEC = st.number_input('Cation exchange capacity of biochar (cmol/kg)', 0.0)
+    ONC = st.number_input('Molar ratio of plus of oxygen and nitrogen to carbon ((O + N)/C)', 0.0)
 with col11:
-    AT = st.number_input('Adsorption temperature (°C)', 0.0)
+    PHb = st.number_input('pH of biochar', 0.0)
 
-col12, col13 = st.columns(2)
+col12, col13, col14 = st.columns(2)
 with col12:
-    PHS = st.number_input('pH of solution', 0.0)
+    ECb = st.number_input('Electrical conductivity (biochar, mS·cm-1)', 0.0)
 with col13:
-    C0 = st.number_input('Initial concentration of heavy metal (mmol/g)', 0.0)
+    Ash = st.number_input('Ash content (%)', 0.0)
+with col14:
+    CECb = st.number_input('Cation exchange capacity (biochar, cmol(+)/kg)', 0.0)
+
+
+col15, col16 = st.columns(2)
+with col15:
+    SSA = st.number_input('Surface area of biochar (m2/g)', 0.0)
+with col16:
+    THMs = st.number_input('Total Heavy Metals in Soil (mg/kg)', 0.0)
+
+col17, col18 = st.columns(2)
+with col17:
+    THMb = st.number_input('Total Heavy Metals in Biochar (mg/kg)', 0.0)
+with col18:
+    AHMs = st.number_input('Available Heavy Metals in Soil (mg/kg))', 0.0)
+
+col19, col20, col21  = st.columns(2)
+with col19:
+    WHC = st.number_input('Soil water capacity (%)', 0.0)
+with col20:
+    add = st.number_input('Dosage of biochar (%)', 0.0)
+with col21:
+    Time = st.number_input('Time (day) ', 0.0)
+
 
 # Dropdown for heavy metal type selection
-col14, col15 = st.columns(2)
-with col14:
-    heavy_metals = ['As3+', 'Cd2+', 'Cu2+', 'Ni2+', 'Pb2+', 'Zn2+']
+col22, col23 = st.columns(2)
+with col21:
+    heavy_metals = ['As', 'Cd', 'Cu', 'Pb', 'Zn']
     selected_metal = st.selectbox('Select heavy metal type', heavy_metals)
 
 # Map selected heavy metal to its one-hot encoding
 metal_one_hot_map = {
-    'As3+': [1.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000],
-    'Cd2+': [0.0000, 1.0000, 0.0000, 0.0000, 0.0000, 0.0000],
-    'Cu2+': [0.0000, 0.0000, 1.0000, 0.0000, 0.0000, 0.0000],
-    'Ni2+': [0.0000, 0.0000, 0.0000, 1.0000, 0.0000, 0.0000],
-    'Pb2+': [0.0000, 0.0000, 0.0000, 0.0000, 1.0000, 0.0000],
-    'Zn2+': [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 1.0000]
+    'As': [1.0000, 0.0000, 0.0000, 0.0000, 0.0000],
+    'Cd': [0.0000, 1.0000, 0.0000, 0.0000, 0.0000],
+    'Cu': [0.0000, 0.0000, 1.0000, 0.0000, 0.0000],
+    'Pb': [0.0000, 0.0000, 0.0000, 1.0000, 0.0000],
+    'Zn': [0.0000, 0.0000, 0.0000, 0.0000, 1.0000]
 }
 metal_one_hot = metal_one_hot_map[selected_metal]
 
 # Gather all inputs into a list for normalization
-input_values = [PHB, Ash, C_m, H_m, N_m, O_m, H_C, HO2NC, SA, CEC, AT, PHS, C0] + metal_one_hot
+input_values = [PHs, ECs, CECs, Clay, Silt, Sand, OC, Ptem, CH, ONC, PHb, ECb, CECb, Ash, SSA, THMs, THMb, WHC, add, Time] + metal_one_hot
 
 # Normalize the input values based on min and max values
 # Replace with the actual normalization logic based on your dataset
-min_values = [6.47, 1.57, 6.3525, 5.2579, 0.0785, -6.7485, 0.0941, -0.6957, 1.15, 0.2123, 20.0, 2.0, 0.0027]
-max_values = [12.61, 89.78, 73.4327, 42.7579, 2.3203, 17.0788, 1.076, 0.8893, 485.0, 203.57, 40.0, 10.0, 6.7551]
+min_values = [2.9000 6.6000	1.7887	3.7026	13.2548	11.9000	-1.3153	300.0000 -1.5001 6.7430 680.0000 -680.6738 0.8900 0.0056 0.1498	0.0388	0.0000	0.0000	-1.0000	0.5000	7.0000]
+max_values = [7.8506 11.5000 30.4313 36.4000 70.0000 92.3000 10.3700 600.0000 3.0100 56.0526 54,984.0000 326.0179 96.6000 0.9238 78.7000 32,673.0000 1,490.6000	2,600.0000	80.0000	10.0000	150.0000]
 
 inputvec = [(2 * (val - min_val) / (max_val - min_val) - 1) if i < len(min_values)
             else val  # Skip normalization for one-hot encoding
@@ -154,7 +177,7 @@ if st.button('Run'):
         yhat1 = YY
 
         # Convert predictions back to the original scale
-        RE = (yhat1 + 1) * (100.0 - 0.0) * 0.5 + 0.7  # min=0.7, max=100 for Zinc
+        RE = (yhat1 + 1) * (100.0 - 0.0) * 0.5 + 0.0  # min=0.0, max=100 for Zinc
         if RE>99: RE=99;
         # Display predictions in a single row using columns
         col19, col20, col21 = st.columns(3)
