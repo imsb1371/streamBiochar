@@ -124,7 +124,7 @@ with col21:
 
 # Dropdown for heavy metal type selection
 col22, col23 = st.columns(2)
-with col21:
+with col22:
     heavy_metals = ['As', 'Cd', 'Cu', 'Pb', 'Zn']
     selected_metal = st.selectbox('Select heavy metal type', heavy_metals)
 
@@ -139,51 +139,54 @@ metal_one_hot_map = {
 metal_one_hot = metal_one_hot_map[selected_metal]
 
 # Gather all inputs into a list for normalization
-input_values = [PHs, ECs, CECs, Clay, Silt, Sand, OC, Ptem, CH, ONC, PHb, ECb, CECb, Ash, SSA, THMs, THMb, WHC, add, Time] + metal_one_hot
+input_values = [PHs, ECs, CECs, Clay, Silt, Sand, OC, Ptem, CH, ONC, PHb, ECb, CECb, Ash, SSA, THMs, THMb, AHMs, WHC, add, Time] + metal_one_hot
 
 # Normalize the input values based on min and max values
 # Replace with the actual normalization logic based on your dataset
-min_values = [2.9000 6.6000	1.7887	3.7026	13.2548	11.9000	-1.3153	300.0000 -1.5001 6.7430 680.0000 -680.6738 0.8900 0.0056 0.1498	0.0388	0.0000	0.0000	-1.0000	0.5000	7.0000]
-max_values = [7.8506 11.5000 30.4313 36.4000 70.0000 92.3000 10.3700 600.0000 3.0100 56.0526 54,984.0000 326.0179 96.6000 0.9238 78.7000 32,673.0000 1,490.6000	2,600.0000	80.0000	10.0000	150.0000]
 
-inputvec = [(2 * (val - min_val) / (max_val - min_val) - 1) if i < len(min_values)
-            else val  # Skip normalization for one-hot encoding
-            for i, (val, min_val, max_val) in enumerate(zip(input_values, min_values + [0] * 6, max_values + [1] * 6))]
-inputvec = np.array(inputvec)
+min_values = [2.9000, 6.6000, 1.7887, 3.7026, 13.2548, 11.9000, -1.3153, 300.0000, -1.5001, 6.7430, 
+680.0000, -680.6738, 0.8900, 0.0056, 0.1498, 0.0388, 0.00, 0.00, -1.0000, 0.5000, 7.0000]
+
+max_values = [7.8506, 11.5, 30.4313, 36.4, 70.0, 92.3, 10.37, 600.0, 3.01, 56.0526, 
+54984.0, 326.0179, 96.6, 0.9238, 78.7, 32673.0, 1490.6, 2600.0, 80.0, 10.0, 150.0]
+
+numeric_inputs = input_values[:len(min_values)]  # First 21 elements
+normalized_inputs = [
+    (2 * (val - min_val) / (max_val - min_val) - 1)
+    for val, min_val, max_val in zip(numeric_inputs, min_values, max_values)
+]
+
+# Combine normalized inputs with one-hot encoding
+inputvec = np.array(normalized_inputs + metal_one_hot)
+
+# Check zeros only in the numeric features
+zero_count = sum(1 for value in numeric_inputs if value == 0)
 
 
-
-# Check for zeros
-zero_count = sum(1 for value in inputvec if value == 0)
-
-
-
-# Load models and predict the outputs when the button is pressed
 if st.button('Run'):
-
-     ## Validation: If more than 1 inputs are zero, show a warning message
     if zero_count > 1:
-        st.error(f"Error: More than one input values are zero. Please provide valid inputs for features.")
+        st.error("Error: More than one input values are zero. Please provide valid inputs for features.")
     else:
+        try:
+            # Load the model
+            model2 = joblib.load('model.pkl')
 
-        ## load model
-        model2 = joblib.load('model.pkl')
+            # Predict using the model
+            inputvec = inputvec.reshape(1, -1)  # Ensure correct shape
+            YY = model2.predict(inputvec)
 
-        # YY = stacked_prediction(members, model2, input_values)
-        YY = model2.predict(inputvec)
+            # Calculate removal efficiency
+            RE = (YY + 1) * (100.0 - 0.0) * 0.5 + 0.0
+            RE = min(RE, 99)  # Limit RE to 99%
 
+            # Display predictions
+            col19, col20, col21 = st.columns(3)
+            with col19:
+                st.write("Removal efficiency (%): ", np.round(abs(RE), 2))
 
-        # Predict removal efficiency
-        yhat1 = YY
+        except Exception as e:
+            st.error(f"Model prediction failed: {e}")
 
-        # Convert predictions back to the original scale
-        RE = (yhat1 + 1) * (100.0 - 0.0) * 0.5 + 0.0  # min=0.0, max=100 for Zinc
-        if RE>99: RE=99;
-        # Display predictions in a single row using columns
-        col19, col20, col21 = st.columns(3)
-        # Display predictions
-        with col19:
-            st.write("removal efficiency (%): ", np.round(abs(RE), decimals=2))
 
 
 filename7 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture3.PNG'
