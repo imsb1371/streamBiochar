@@ -113,7 +113,7 @@ with col17:
 with col18:
     AHMs = st.number_input('Available Heavy Metals in Soil (mg/kg))', 0.0)
 
-col19, col20, col21  = st.columns(2)
+col19, col20, col21  = st.columns(3)
 with col19:
     WHC = st.number_input('Soil water capacity (%)', 0.0)
 with col20:
