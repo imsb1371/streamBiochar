@@ -9,55 +9,14 @@ import pandas  as pd; import pickle
 
 import os
 
-filename1 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture1.PNG'
-filename2 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture2.PNG'
+filename1 = 'https://raw.githubusercontent.com/imsb1371/streamBiochar/refs/heads/main/Capture1.PNG'
+# filename2 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture2.PNG'
 
 st.title('Prediction of Heavy Metal Removal Efficiency Using Biochar')
 with st.container():
     st.image(filename1)
-    st.image(filename2)
+    # st.image(filename2)
 
-
-# # Arrange input boxes into three columns for input features
-# col1, col2, col3 = st.columns(3)
-
-# with col1:
-#     PHB = st.number_input('Biochar pH', 0.0)
-# with col2:
-#     Ash = st.number_input('Ash content (%)', 0.0)
-# with col3:
-#     C_m = st.number_input('Mole contents of C (mmol/g)', 0.0)
-
-# col4, col5, col6 = st.columns(3)
-# with col4:
-#     H_m = st.number_input('Mole contents of H (mmol/g)', 0.0)
-# with col5:
-#     N_m = st.number_input('Mole contents of N (mmol/g)', 0.0)
-# with col6:
-#     O_m = st.number_input('Mole contents of O (mmol/g)', 0.0)
-
-# col7, col8, col9 = st.columns(3)
-# with col7:
-#     H/C = st.number_input('Atomic ratios (H/C)', 0.0)
-# with col8:
-#     HO2NC = st.number_input('Atomic ratios (HO2NC)', 0.0)
-# with col9:
-#     SA = st.number_input('Specific surface area (m2/g)', 0.0)
-
-# col10, col11, col12 = st.columns(3)
-# with col10:
-#     CEC = st.number_input('Cation exchange capacity of biochar (cmol/kg)', 0.0)
-# with col11:
-#     AT = st.number_input('Asorption temperature (°C)', 0.0)
-
-
-# col13, col14, col15 = st.columns(3)
-# with col13:
-#     PHS = st.number_input('pH of solution)', 0.0)
-# with col14:
-#     C0 = st.number_input('Initial concentration of heavy metal (mmol/g)', 0.0)
-# with col15:
-#     HMT = st.number_input('Metal type)', 0.0)
 
 
 # Arrange input boxes into three columns for input features
@@ -191,8 +150,8 @@ if st.button('Run'):
 
 
 
-filename7 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture3.PNG'
-filename8 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture4.PNG'
+filename7 = 'https://raw.githubusercontent.com/imsb1371/streamBiochar/refs/heads/main/Capture3.PNG'
+filename8 = 'https://raw.githubusercontent.com/imsb1371/streamBiochar/refs/heads/main/Capture4.PNG'
 
 col22, col23 = st.columns(2)
 with col22:
