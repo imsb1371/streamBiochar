@@ -92,7 +92,7 @@ with col10:
 with col11:
     PHb = st.number_input('pH of biochar', 0.0)
 
-col12, col13, col14 = st.columns(2)
+col12, col13, col14 = st.columns(3)
 with col12:
     ECb = st.number_input('Electrical conductivity (biochar, mS·cm-1)', 0.0)
 with col13:
@@ -169,7 +169,7 @@ if st.button('Run'):
     else:
         try:
             # Load the model
-            model2 = joblib.load('model.pkl')
+            model2 = joblib.load('Model.pkl')
 
             # Predict using the model
             inputvec = inputvec.reshape(1, -1)  # Ensure correct shape
