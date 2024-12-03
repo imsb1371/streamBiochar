@@ -83,7 +83,7 @@ with col8:
 with col9:
     CH = st.number_input('Molar ratio of carbon to hydrogen', 0.0)
 
-col10 = st.columns(1)
+col10, col11 = st.columns(2)
 with col10:
     ONC = st.number_input('Molar ratio of plus of oxygen and nitrogen to carbon ((O + N)/C)', 0.0)
 
