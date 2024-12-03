@@ -61,13 +61,10 @@ with st.container():
 
 
 # Arrange input boxes into three columns for input features
-col1, col2, col3 = st.columns(3)
-
+col1, col2 = st.columns(2)
 with col1:
-    PHs = st.number_input('pH of soil', 0.0)
-with col2:
     ECs = st.number_input('Electrical conductivity (soil, mS·cm-1)', 0.0)
-with col3:
+with col2:
     CECs = st.number_input('Cation exchange capacity (Soil, cmol(+)/kg)', 0.0)
 
 col4, col5, col6 = st.columns(3)
@@ -89,15 +86,11 @@ with col9:
 col10, col11 = st.columns(2)
 with col10:
     ONC = st.number_input('Molar ratio of plus of oxygen and nitrogen to carbon ((O + N)/C)', 0.0)
-with col11:
-    PHb = st.number_input('pH of biochar', 0.0)
 
-col12, col13, col14 = st.columns(3)
+col12, col13 = st.columns(3)
 with col12:
     ECb = st.number_input('Electrical conductivity (biochar, mS·cm-1)', 0.0)
 with col13:
-    Ash = st.number_input('Ash content (%)', 0.0)
-with col14:
     CECb = st.number_input('Cation exchange capacity (biochar, cmol(+)/kg)', 0.0)
 
 
@@ -122,9 +115,18 @@ with col21:
     Time = st.number_input('Time (day) ', 0.0)
 
 
-# Dropdown for heavy metal type selection
-col22, col23 = st.columns(2)
+col22, col23, col24  = st.columns(3)
 with col22:
+    PHs = st.number_input('pH of soil', 0.0)
+with col23:
+    PHb = st.number_input('pH of biochar', 0.0)
+with col24:
+    Ash = st.number_input('Ash content (%)', 0.0)
+
+
+# Dropdown for heavy metal type selection
+col25, col26 = st.columns(2)
+with col25:
     heavy_metals = ['As', 'Cd', 'Cu', 'Pb', 'Zn']
     selected_metal = st.selectbox('Select heavy metal type', heavy_metals)
 
