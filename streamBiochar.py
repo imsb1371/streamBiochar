@@ -105,11 +105,9 @@ input_values = [PHs, ECs, CECs, Clay, Silt, Sand, OC, Ptem, CH, ONC, PHb, ECb, C
 # Normalize the input values based on min and max values
 # Replace with the actual normalization logic based on your dataset
 
-min_values = [2.9000, 6.6000, 1.7887, 3.7026, 13.2548, 11.9000, -1.3153, 300.0000, -1.5001, 6.7430, 
-680.0000, -680.6738, 0.8900, 0.0056, 0.1498, 0.0388, 0.00, 0.00, -1.0000, 0.5000, 7.0000]
+min_values = [2.,0.03,3.96,5.7,3,2.09,680,300,6.74301676,0.005555556,3.25,0.0176,7.42,1.66,0.14,0.03884,0,0,-1,0.5,2]
 
-max_values = [7.8506, 11.5, 30.4313, 36.4, 70.0, 92.3, 10.37, 600.0, 3.01, 56.0526, 
-54984.0, 326.0179, 96.6, 0.9238, 78.7, 32673.0, 1490.6, 2600.0, 80.0, 10.0, 150.0]
+max_values = [8.64,3.01,24.6,36.96,70,92.3,57600,650,57.3558023,0.923777962,12.2,10.37,96.6,78.7,907.4,32673,1490.6,2600,80,10,150]
 
 numeric_inputs = input_values[:len(min_values)]  # First 21 elements
 normalized_inputs = [
