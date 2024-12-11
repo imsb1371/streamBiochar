@@ -10,12 +10,12 @@ import pandas  as pd; import pickle
 import os
 
 filename1 = 'https://raw.githubusercontent.com/imsb1371/streamBiochar/refs/heads/main/Capture1.PNG'
-# filename2 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture2.PNG'
+filename2 = 'https://raw.githubusercontent.com/imsb1371/ZCAprediction/refs/heads/main/Capture2.PNG'
 
 st.title('Prediction of Heavy Metal Removal Efficiency Using Biochar')
 with st.container():
     st.image(filename1)
-    # st.image(filename2)
+    st.image(filename2)
 
 
 
