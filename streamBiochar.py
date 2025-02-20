@@ -45,6 +45,9 @@ with col9:
 col10, col11 = st.columns(2)
 with col10:
     ONC = st.number_input('Molar ratio of plus of oxygen and nitrogen to carbon', 0.0)
+with col11:
+    heavy_metals = ['As', 'Cd', 'Cu', 'Pb', 'Zn']
+    selected_metal = st.selectbox('Select heavy metal type', heavy_metals)
 
 col12, col13 = st.columns(2)
 with col12:
@@ -84,10 +87,10 @@ with col24:
 
 
 # Dropdown for heavy metal type selection
-col25, col26 = st.columns(2)
-with col25:
-    heavy_metals = ['As', 'Cd', 'Cu', 'Pb', 'Zn']
-    selected_metal = st.selectbox('Select heavy metal type', heavy_metals)
+# col25, col26 = st.columns(2)
+# with col25:
+#     heavy_metals = ['As', 'Cd', 'Cu', 'Pb', 'Zn']
+#     selected_metal = st.selectbox('Select heavy metal type', heavy_metals)
 
 # Map selected heavy metal to its one-hot encoding
 metal_one_hot_map = {
