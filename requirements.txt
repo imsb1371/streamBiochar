@@ -1,11 +1,11 @@
-streamlit>=1.35.0
+streamlit==1.35.0
 
 numpy==1.26.4
 pandas==2.2.2
 scikit-learn==1.5.0
 joblib==1.4.2
 
-setuptools>=70.0.0
-wheel
+setuptools==69.5.1
+wheel==0.43.0
 
-tensorflow-cpu==2.17.0
+tensorflow-cpu==2.17.1
